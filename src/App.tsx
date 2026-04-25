@@ -713,17 +713,17 @@ export default function App() {
               x="26" 
               y="42" 
               fontFamily="'Times New Roman', Times, serif" 
-              fontSize="32" 
+              fontSize="24" 
               fontStyle="italic"
               fontWeight="bold" 
               fill="#80FFFF" 
               textAnchor="middle"
               filter="url(#blueNeonGlow)">
-              B
+              NW
             </text>
             
             <text 
-              x="46" 
+              x="48" 
               y="26" 
               fontFamily="'Times New Roman', Times, serif" 
               fontSize="20" 
@@ -732,7 +732,7 @@ export default function App() {
               fill="#FFB3B3" 
               textAnchor="middle"
               filter="url(#redNeonGlow)">
-              n
+              #
             </text>
           </svg>
           <div className="flex items-center bg-zinc-950 p-1 rounded-lg border border-zinc-800">
