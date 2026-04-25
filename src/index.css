@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-live-500: #90BE6D;
+  --color-live-600: #C9E3AC;
+  --color-live-900: #37371F;
+  --color-live-950: #1a1a0d;
+  --color-live-highlight: #A0CFD3;
+  --color-demo-500: #E5446D;
+  --color-accent-light: #EAEFBD;
+}

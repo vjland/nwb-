@@ -1,0 +1,50 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blueNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="#00FFFF" result="flood"/> <feComposite in="flood" in2="blur" operator="in" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="redNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/> <feFlood flood-color="#FF0000" result="flood"/> <feComposite in="flood" in2="blur" operator="in" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="12" fill="#000000"/>
+  
+  <rect x="3" y="3" width="58" height="58" rx="10" stroke="#CCFFFF" stroke-width="3" filter="url(#blueNeonGlow)"/>
+  
+  <text 
+    x="26" 
+    y="42" 
+    font-family="'Times New Roman', Times, serif" 
+    font-size="32" 
+    font-style="italic"
+    font-weight="bold" 
+    fill="#80FFFF" 
+    text-anchor="middle"
+    filter="url(#blueNeonGlow)">
+    B
+  </text>
+  
+  <text 
+    x="46" 
+    y="26" 
+    font-family="'Times New Roman', Times, serif" 
+    font-size="20" 
+    font-style="italic"
+    font-weight="bold" 
+    fill="#FFB3B3" 
+    text-anchor="middle"
+    filter="url(#redNeonGlow)">
+    n
+  </text>
+</svg>
