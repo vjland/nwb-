@@ -943,31 +943,35 @@ export default function App() {
                 </button>
               </div>
 
-              {selectionStart !== null && currentChartData[selectionStart] !== undefined && (
-                <div className="flex flex-col gap-1 bg-zinc-900/90 px-2.5 py-1.5 rounded-md border border-zinc-700 shadow-sm backdrop-blur-sm text-xs font-mono text-zinc-300 w-fit">
+              {selectionStart !== null && currentChartData[selectionStart] !== undefined && currentLogs[selectionStart] && (
+                <div className="flex flex-col gap-1 bg-zinc-900/90 px-3 py-2 rounded-lg border border-zinc-700 shadow-sm backdrop-blur-sm text-sm font-mono text-zinc-300 w-fit leading-tight">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#00FF00]"></div>
-                    <span className="text-zinc-100 font-bold">Start: Hand {selectionStart + 1}</span>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#00FF00]"></div>
+                    <span className="text-zinc-100 font-bold">#{selectionStart + 1}</span>
                     <span className="text-zinc-600">|</span>
-                    <span className={currentChartData[selectionStart] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>Score: {currentChartData[selectionStart]}</span>
+                    <span className={currentLogs[selectionStart].winner === "Player" ? "text-blue-400 font-bold" : currentLogs[selectionStart].winner === "Banker" ? "text-red-400 font-bold" : "text-green-400 font-bold"}>{currentLogs[selectionStart].winner.charAt(0)}{currentLogs[selectionStart].isNatural ? ' (Nat)' : ''}</span>
+                    <span className="text-zinc-600">|</span>
+                    <span className={currentChartData[selectionStart] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>{currentChartData[selectionStart]}</span>
                   </div>
-                  {selectionEnd !== null && currentChartData[selectionEnd] !== undefined && (
+                  {selectionEnd !== null && currentChartData[selectionEnd] !== undefined && currentLogs[selectionEnd] && (
                     <div className="flex items-center gap-2">
-                       <div className="w-2 h-2 rounded-full bg-[#FF00FF]"></div>
-                       <span className="text-zinc-100 font-bold">End: Hand {selectionEnd + 1}</span>
+                       <div className="w-2.5 h-2.5 rounded-full bg-[#FF00FF]"></div>
+                       <span className="text-zinc-100 font-bold">#{selectionEnd + 1}</span>
                        <span className="text-zinc-600">|</span>
-                       <span className={currentChartData[selectionEnd] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>Score: {currentChartData[selectionEnd]}</span>
+                       <span className={currentLogs[selectionEnd].winner === "Player" ? "text-blue-400 font-bold" : currentLogs[selectionEnd].winner === "Banker" ? "text-red-400 font-bold" : "text-green-400 font-bold"}>{currentLogs[selectionEnd].winner.charAt(0)}{currentLogs[selectionEnd].isNatural ? ' (Nat)' : ''}</span>
+                       <span className="text-zinc-600">|</span>
+                       <span className={currentChartData[selectionEnd] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>{currentChartData[selectionEnd]}</span>
                     </div>
                   )}
                   {selectionEnd !== null && currentChartData[selectionEnd] !== undefined && (
-                    <div className="flex items-center gap-2 pt-1 border-t border-zinc-800">
-                      <span className="text-zinc-400">Diff:</span>
+                    <div className="flex items-center gap-2 pt-1.5 mt-1 border-t border-zinc-800">
+                      <span className="text-zinc-400">Δ</span>
                       <span className={currentChartData[selectionEnd] - currentChartData[selectionStart] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
                         {currentChartData[selectionEnd] - currentChartData[selectionStart] > 0 ? "+" : ""}
                         {currentChartData[selectionEnd] - currentChartData[selectionStart]}
                       </span>
                       <span className="text-zinc-600">|</span>
-                      <span className="text-zinc-400">Hands: {Math.abs(selectionEnd - selectionStart)}</span>
+                      <span className="text-zinc-400">n={Math.abs(selectionEnd - selectionStart)}</span>
                     </div>
                   )}
                 </div>

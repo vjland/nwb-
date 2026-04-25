@@ -249,31 +249,36 @@ function updateSelectedHandInfo() {
   const infoEl = document.getElementById('selected-hand-info');
   if (!infoEl) return;
   const chartData = appMode === 'live' ? liveChartData : demoChartData;
+  const logs = appMode === 'live' ? liveLogs : demoLogs;
   
-  if (selectionStart !== null && chartData[selectionStart] !== undefined) {
+  if (selectionStart !== null && chartData[selectionStart] !== undefined && logs[selectionStart]) {
     let html = `
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 leading-tight">
         <div class="flex items-center gap-2">
-          <div class="w-2 h-2 rounded-full bg-[#00FF00]"></div>
-          <span class="text-zinc-100 font-bold">Start: Hand ${selectionStart + 1}</span>
+          <div class="w-2.5 h-2.5 rounded-full bg-[#00FF00]"></div>
+          <span class="text-zinc-100 font-bold">#${selectionStart + 1}</span>
           <span class="text-zinc-600">|</span>
-          <span class="${chartData[selectionStart] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}">Score: ${chartData[selectionStart]}</span>
+          <span class="${logs[selectionStart].winner === 'Player' ? 'text-blue-400' : logs[selectionStart].winner === 'Banker' ? 'text-red-400' : 'text-green-400'} font-bold">${logs[selectionStart].winner.charAt(0)}${logs[selectionStart].isNatural ? ' (Nat)' : ''}</span>
+          <span class="text-zinc-600">|</span>
+          <span class="${chartData[selectionStart] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}">${chartData[selectionStart]}</span>
         </div>`;
     
-    if (selectionEnd !== null && chartData[selectionEnd] !== undefined) {
+    if (selectionEnd !== null && chartData[selectionEnd] !== undefined && logs[selectionEnd]) {
       const diff = chartData[selectionEnd] - chartData[selectionStart];
       html += `
         <div class="flex items-center gap-2">
-          <div class="w-2 h-2 rounded-full bg-[#FF00FF]"></div>
-          <span class="text-zinc-100 font-bold">End: Hand ${selectionEnd + 1}</span>
+          <div class="w-2.5 h-2.5 rounded-full bg-[#FF00FF]"></div>
+          <span class="text-zinc-100 font-bold">#${selectionEnd + 1}</span>
           <span class="text-zinc-600">|</span>
-          <span class="${chartData[selectionEnd] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}">Score: ${chartData[selectionEnd]}</span>
+          <span class="${logs[selectionEnd].winner === 'Player' ? 'text-blue-400' : logs[selectionEnd].winner === 'Banker' ? 'text-red-400' : 'text-green-400'} font-bold">${logs[selectionEnd].winner.charAt(0)}${logs[selectionEnd].isNatural ? ' (Nat)' : ''}</span>
+          <span class="text-zinc-600">|</span>
+          <span class="${chartData[selectionEnd] >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}">${chartData[selectionEnd]}</span>
         </div>
-        <div class="flex items-center gap-2 pt-1 border-t border-zinc-800">
-          <span class="text-zinc-400">Diff:</span>
+        <div class="flex items-center gap-2 pt-1.5 mt-1 border-t border-zinc-800">
+          <span class="text-zinc-400">Δ</span>
           <span class="${diff >= 0 ? 'text-green-400 font-bold' : 'text-red-400 font-bold'}">${diff > 0 ? '+' : ''}${diff}</span>
           <span class="text-zinc-600">|</span>
-          <span class="text-zinc-400">Hands: ${Math.abs(selectionEnd - selectionStart)}</span>
+          <span class="text-zinc-400">n=${Math.abs(selectionEnd - selectionStart)}</span>
         </div>`;
     }
     
@@ -281,8 +286,7 @@ function updateSelectedHandInfo() {
     infoEl.innerHTML = html;
     
     infoEl.classList.remove('hidden');
-    // Ensure the container accommodates the larger widget height
-    infoEl.className = "hidden flex flex-col items-start bg-zinc-900/90 px-2.5 py-1.5 rounded-md border border-zinc-700 shadow-sm backdrop-blur-sm text-xs font-mono text-zinc-300 w-fit";
+    infoEl.className = "hidden flex flex-col items-start bg-zinc-900/90 px-3 py-2 rounded-lg border border-zinc-700 shadow-sm backdrop-blur-sm text-sm font-mono text-zinc-300 w-fit";
     infoEl.classList.remove('hidden');
   } else {
     infoEl.classList.add('hidden');
